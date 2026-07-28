@@ -22,7 +22,7 @@ width:100%;
 #btn{
 position:absolute;
 top:10px;
-left:60px;
+left:90px;
 z-index:1000;
 padding:12px;
 background:white;
@@ -34,7 +34,7 @@ cursor:pointer;
 #btnCarte{
 position:absolute;
 top:60px;
-left:60px;
+left:90px;
 z-index:1000;
 padding:12px;
 background:white;
@@ -43,6 +43,7 @@ border:1px solid #888;
 cursor:pointer;
 display:none;
 }
+
 </style>
 
 </head>
@@ -50,13 +51,12 @@ display:none;
 <body>
 
 <button id="btn">
-📍 Chercher les plages autour de moi
+📍 Autour de moi
 </button>
 
 <button id="btnCarte">
 🔍 Chercher dans cette zone
 </button>
-
 <div id="map"></div>
 
 <script>
@@ -74,6 +74,7 @@ let gpsMarker=null;
 let plages=[];
 let rechercheCentre=false;
 let dernierCentre=null;
+let carteDeplacee=false;
 async function chercher(){
 
 plages.forEach(function(p){
@@ -124,12 +125,12 @@ maximumAge:0
 );
 
 }
-map.on("movestart",function(){
+map.on("moveend",function(){
 
+carteDeplacee=true;
 document.getElementById("btnCarte").style.display="block";
 
 });
-
 map.on("moveend",function(){
 
 dernierCentre=map.getCenter();
@@ -141,6 +142,8 @@ document
 .addEventListener("click",function(){
 
 rechercheCentre=true;
+carteDeplacee=false;
+
 chercher();
 
 document.getElementById("btnCarte").style.display="none";
