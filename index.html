@@ -73,19 +73,7 @@ attribution:"© OpenStreetMap"
 let gpsMarker=null;
 let plages=[];
 let rechercheCentre=false;
-let dernierCentre=null;
-let carteDeplacee=false;
 async function chercher(){
-
-plages.forEach(function(p){
-map.removeLayer(p);
-});
-
-plages=[];
-
-if(gpsMarker){
-map.removeLayer(gpsMarker);
-}
 
 if(rechercheCentre){
 
@@ -101,12 +89,12 @@ return;
 
 navigator.geolocation.getCurrentPosition(
 
-async function(position){
+function(position){
 
-const lat=position.coords.latitude;
-const lon=position.coords.longitude;
-
-chercherDepuis(lat,lon);
+chercherDepuis(
+position.coords.latitude,
+position.coords.longitude
+);
 
 },
 function(err){
