@@ -150,8 +150,8 @@ if(!rechercheCentre){ gpsMarker=L.marker([lat,lon]).addTo(map); gpsMarker.bindPo
 const requete=`
 [out:json][timeout:25];
 (
-way["natural"="beach"](around:10000,${lat},${lon});
-relation["natural"="beach"](around:10000,${lat},${lon});
+way["natural"="beach"](around:50000,${lat},${lon}); 
+relation["natural"="beach"](around:50000,${lat},${lon});
 );
 out geom;
 `;
